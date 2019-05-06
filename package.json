@@ -1,6 +1,6 @@
 {
-  "name": "gct5",
-  "version": "5.0.0",
+  "name": "zsbweb-egg",
+  "version": "1.0.0",
   "description": "",
   "private": true,
   "egg": {
@@ -30,8 +30,8 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-gct4",
-    "stop": "egg-scripts stop --title=egg-server-gct4",
+    "start": "egg-scripts start --daemon --title=zsbweb-egg",
+    "stop": "egg-scripts stop --title=zsbweb-egg",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug --port 7002",
     "test": "npm run lint -- --fix && npm run test-local",
