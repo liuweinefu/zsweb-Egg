@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = app => {
-    const { STRING, INTEGER, DECIMAL } = app.Sequelize;
+    const { STRING, INTEGER, DECIMAL, BOOLEAN } = app.Sequelize;
 
     const CardType = app.model.define('CardType', {
         // id: {

@@ -64,12 +64,10 @@ module.exports = app => {
 
     User.associate = function () {
         //app.model.User.hasMany(app.model.Post, { as: 'posts', foreignKey: 'user_id' });
-        const { User, UserType, CardRecharge, Consumption, Wage } = app.model;
+        const { User, UserType, } = app.model;
 
         User.belongsTo(UserType);
-        User.hasMany(CardRecharge);
-        User.hasMany(Consumption);
-        User.hasMany(Wage);
+
 
         // app.model.User.belongsTo(app.model.UserType);
         // app.model.User.hasMany(app.model.CardRecharge);

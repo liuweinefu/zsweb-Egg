@@ -60,11 +60,9 @@ module.exports = app => {
 
     Card.associate = function () {
         //app.model.User.hasMany(app.model.Post, { as: 'posts', foreignKey: 'user_id' });
-        const { Card, CardType, Member, CardRecharge, Consumption } = app.model;
+        const { Card, CardType, } = app.model;
         Card.belongsTo(CardType);
-        Card.hasMany(Member);
-        Card.hasMany(CardRecharge);
-        Card.hasMany(Consumption);
+
     };
 
     return Card;
