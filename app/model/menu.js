@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = app => {
-    const { STRING, INTEGER, DATE } = app.Sequelize;
+    const { STRING, INTEGER, BOOLEAN, DATE } = app.Sequelize;
 
     const Menu = app.model.define('Menu', {
         // id: {
