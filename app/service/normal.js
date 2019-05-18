@@ -8,11 +8,57 @@ class NormalService extends Service {
     constructor(ctx) {
         super(ctx);
     }
-    async findAll(page = 1, rows = 50) {
 
-        const user = await this.ctx.db.query('select * from user where uid = ?', uid);
-        return user;
+    /**
+     *sqModel 按条件查询   参数options参见http://docs.sequelizejs.com/class/lib/model.js~Model.html#static-method-findAndCountAll
+     */
+    async find() {
+        const { ctx } = this;
+        const M = ctx.currentModel;
+        const C = ctx.options;
+        if (!M) {
+            return false;
+        }
+        let result = await M.findAndCountAll(C);
+        return result;
     }
+
+    async update() {
+        const { ctx } = this;
+        const M = ctx.currentModel;
+        const C = ctx.options;
+        const D = ctx.data;
+
+        if (!Array.isArray(D) || D.length === 0) {
+            return 0;
+        }
+
+        var PromiseQueue = [];
+
+        PromiseQueue = D.map((row) => {
+            Object.keys(row).forEach(field => {
+                if (!O.updateAttributes.includes(field)) {
+                    delete row[field];
+                }
+                if (field.includes('_id') && !row[field]) {
+                    row[field] = null;
+
+                }
+            })
+            return M[O.modelName].upsert(row, {
+                fields: O.updateAttributes
+            });
+        });
+        await Promise.all(upsertRecords);
+
+        return upsertRecords.length;
+
+
+    }
+
+
+
+
 
 }
 

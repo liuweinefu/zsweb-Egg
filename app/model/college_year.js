@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = app => {
-    const { STRING, INTEGER, DATE, BOOLEAN } = app.Sequelize;
+    const { STRING, INTEGER, DECIMAL, DATE, BOOLEAN, TEXT } = app.Sequelize;
 
-    const User = app.model.define('User', {
+    const CollegeYear = app.model.define('CollegeYear', {
         // id: {
         //     type: UUID,
         //     primaryKey: true,
@@ -15,63 +15,50 @@ module.exports = app => {
             autoIncrement: true,
             //defaultValue: UUIDV1,
         },
-        nickname: {
-            //索引长度受限，776bytes
-            type: STRING(16),
-            allowNull: false,
-            unique: true
-        },
-        name: {
-            type: STRING(16),
-            allowNull: false,
-            unique: false
-        },
-        pass: {
-            type: STRING(32),
-            //allowNull: false,
-            //defaultValue: md5('888888'),
-        },
-        phone: {
-            type: STRING(11),
-            allowNull: true,
-        },
-        remark: {
-            type: STRING(255)
-        },
-        location: {
-            type: STRING(32),
-            //allowNull: false,
-            //defaultValue: md5('888888'),
-        },
-        enable: {
-            type: BOOLEAN,
-            allowNull: false,
-            defaultValue: true,
-        },
         year: {
             type: STRING(4),
             allowNull: false,
         },
-        last_sign_in_at: {
-            type: DATE,
-        }
+        maxScore: {//最高分
+            type: DECIMAL(16, 4),
+            defaultValue: 0.00,
+        },
+        minScore: {//最低分
+            type: DECIMAL(16, 4),
+            defaultValue: 0.00,
+        },
+        avgScore: {//平均分
+            type: DECIMAL(16, 4),
+            defaultValue: 0.00,
+        },
+        highestRanking: {//最高排位
+            type: INTEGER,
+        },
+        lowestRanking: {//最低排位
+            type: INTEGER,
+        },
+        middleRanking: {//中位数排位
+            type: INTEGER,
+        },
+        total: {//招生量
+            type: INTEGER,
+            //defaultValue: UUIDV1,
+        },
     }, {
             timestamps: true,
             underscored: true,
             freezeTableName: true,
-            tableName: 'user',
+            tableName: 'college_year',
         });
 
-    User.prototype.logSignin = async () => {
-        await this.update({ last_sign_in_at: new Date() });
-    }
 
-    User.associate = function () {
+    CollegeYear.associate = function () {
         //app.model.User.hasMany(app.model.Post, { as: 'posts', foreignKey: 'user_id' });
-        const { User, UserType, Stu } = app.model;
+        const { CollegeYear, College } = app.model;
 
-        User.belongsTo(UserType);
-        User.hasMany(Stu);
+        CollegeYear.belongsTo(College);
+
+        // College.hasMany(CollegeYear);
 
 
         // app.model.User.belongsTo(app.model.UserType);
@@ -103,5 +90,5 @@ module.exports = app => {
 
     // };
 
-    return User;
+    return CollegeYear;
 };

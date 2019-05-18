@@ -2,12 +2,17 @@
 
 const Controller = require('egg').Controller;
 
-class NormalController extends Controller {
+class UserController extends Controller {
   constructor(ctx) {
-    ctx.ModelName = ctx.routerName.slice(0, -1);
-
+    ctx.currentModel = ctx.model.User;
+    ctx.findOptions = {};//参考：http://docs.sequelizejs.com/class/lib/model.js~Model.html#static-method-findAll
+    ctx.upsertOptions = {};//参考:http://docs.sequelizejs.com/class/lib/model.js~Model.html#static-method-upsert
+    ctx.destroyOptions = {};//参考：http://docs.sequelizejs.com/class/lib/model.js~Model.html#static-method-destroy
     super(ctx);
   }
+
+
+
 
   async create() {
     const { ctx } = this;
@@ -49,4 +54,4 @@ class NormalController extends Controller {
   }
 }
 
-module.exports = NormalController;
+module.exports = UserController;

@@ -4,14 +4,23 @@
  * @param {Egg.Application} app - egg application
  */
 
-const RESTfulAPI = ['User', 'UserType', 'Card', 'CardType']
+const models = ['User', 'UserType',]
+
 module.exports = app => {
   const { router, controller } = app;
 
-  RESTfulAPI.forEach(url => {
+  // models.forEach(model => {
+  //   // router.get('/' + ctr, controller[ctr].getTpl);
+  //   router.post('/' + model + '/find', controller[model].find);
+  //   router.post('/' + model + '/save', controller[model].save);
+  //   router.post('/' + model + '/replace', controller[model].replace);
+  //   router.post('/' + model + '/delete', controller[model].delete);
+  // })
 
-    app.router.resources(url, '/api/' + url, app.controller.normal);
-  })
+  // RESTfulAPI.forEach(url => {
+
+  //   app.router.resources(url, '/api/' + url, app.controller.normal);
+  // });
 
 
   // router.get('/', controller.home.index);

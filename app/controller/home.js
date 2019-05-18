@@ -13,11 +13,7 @@ class HomeController extends Controller {
     const { ctx } = this;
     this.ctx.body = '列表';
   }
-  async upload() {
-    const { ctx } = this;
-    ctx.body = 'hi, egg';
 
-  }
 }
 
 module.exports = HomeController;
